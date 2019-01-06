@@ -5,6 +5,7 @@ import { SampleBase } from '../sampleBase';
 import { UploaderComponent } from '@syncfusion/ej2-react-inputs';
 import { detach } from '@syncfusion/ej2-base';
 
+
 export class Customdroparea extends SampleBase {
     
         
@@ -13,7 +14,7 @@ export class Customdroparea extends SampleBase {
             saveUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save',
             removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
         };
-        allowedExtensions = '.pdf, .png, .txt';
+        allowedExtensions = '.pdf, .txt, .xlsx, .docx';
         animationSettings = { effect: 'Zoom' };
     
     rendereComplete() {
@@ -46,6 +47,7 @@ export class Customdroparea extends SampleBase {
     </span>);
     }
     onUploadSuccess(args) {
+
         let li = this.getLiElement(args);
         li.querySelector('.upload-status').innerHTML = args.file.status;
         li.querySelector('.upload-status').classList.add('upload-success');
@@ -61,7 +63,8 @@ export class Customdroparea extends SampleBase {
         li.querySelector('.upload-status').innerHTML = args.file.status + '(' + progressValue + ' )';
     }
     onSelect(args) {
-        let allowedTypes = ['pdf', 'png', 'txt'];
+        console.log(args);
+        let allowedTypes = ['pdf','txt', 'xlsx', 'docx'];
         let modifiedFiles = [];
         for (let file of args.filesData) {
             if (allowedTypes.indexOf(file.type.toLowerCase()) > -1) {
@@ -79,9 +82,19 @@ export class Customdroparea extends SampleBase {
     getLiElement(args) {
         let liElements = document.getElementsByClassName('e-upload')[0].querySelectorAll('.e-upload-files > li');
         let li;
+         
         for (let i = 0; i < liElements.length; i++) {
             if (liElements[i].getAttribute('data-file-name') === args.file.name) {
-                li = liElements[i];
+                if(liElements[i].innerHTML.indexOf('docx') > -1){
+                    liElements[i].innerHTML = liElements[i].innerHTML.replace('docx','doc');
+                    li = liElements[i];
+                }else if(liElements[i].innerHTML.indexOf('xlsx') > -1 ){
+                    liElements[i].innerHTML = liElements[i].innerHTML.replace('xlsx','xls');
+                    li = liElements[i];
+                }else{
+                    li = liElements[i];
+                }
+               
             }
         }
         return li;
@@ -98,17 +111,29 @@ export class Customdroparea extends SampleBase {
                 <div className="font-icons">
                     <span className="e-icons sf-icon-pdf"></span>
                     <span className="e-icons sf-icon-txt"></span>
-                    <span className="e-icons sf-icon-png"></span>
+                    <span className="e-icons sf-icon-xls"></span>
+                    <span className="e-icons sf-icon-doc"></span>
                 </div>
                 <span className="dropText" id="dropText">Drop files here to upload</span>
             </div>
             <div id="customdropArea">
                 <span id="drop" className="customdropArea"><p id="browse"><u>Browse</u></p> </span>  
                             
-            <UploaderComponent id='UploadFiles' type='file' ref={(scope) => { this.uploadObj = scope; }} asyncSettings={this.asyncSettings} selected={this.onSelect.bind(this)} removing={this.onRemoveFile.bind(this)} progress={this.onUploadInProgress.bind(this)} success={this.onUploadSuccess.bind(this)} failure={this.onUploadFailed.bind(this)} allowedExtensions={this.allowedExtensions} template={this.listTemplate} dropArea={this.target}></UploaderComponent>
+            <UploaderComponent id='UploadFiles' type='file' 
+                ref={(scope) => { this.uploadObj = scope; }} 
+                asyncSettings={this.asyncSettings} 
+                selected={this.onSelect.bind(this)} 
+                removing={this.onRemoveFile.bind(this)} 
+                progress={this.onUploadInProgress.bind(this)} 
+                success={this.onUploadSuccess.bind(this)} 
+                failure={this.onUploadFailed.bind(this)} 
+                allowedExtensions={this.allowedExtensions} 
+                template={this.listTemplate} 
+                dropArea={this.target}></UploaderComponent>
             </div>
         </div>
         </div>
+        
         </div>
         </div>);
     }

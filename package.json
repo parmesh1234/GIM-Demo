@@ -10,6 +10,7 @@
     "@material-ui/icons": "latest",
     "@syncfusion/ej2-base": "^16.4.42",
     "@syncfusion/ej2-react-inputs": "^16.4.45",
+    "primereact": "^3.0.0-beta.1",
     "prop-types": "latest",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

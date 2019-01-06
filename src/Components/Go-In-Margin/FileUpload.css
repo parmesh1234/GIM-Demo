@@ -122,9 +122,11 @@ span#dropText {
   top: 50%;
 }
 
-.sf-icon-png:before, .sf-icon-PNG:before { content: "\e70a"; }
+
 .sf-icon-pdf:before, .sf-icon-PDF:before { content: "\e70c"; }
 .sf-icon-txt:before, .sf-icon-TXT:before { content: "\e70d"; }
+.sf-icon-doc:before, .sf-icon-DOC:before { content: "\e703"; }
+.sf-icon-xls:before,.sf-icon-DOC:before  { content: "\e70f"; }
   
 @font-face {
   font-family: 'FiletypeV2 Font';
