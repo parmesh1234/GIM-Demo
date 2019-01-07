@@ -117,9 +117,17 @@ span#dropText {
     list-style: none;
     padding-left: 0px;
 }
-#customTarget .e-upload .e-upload-files .e-file-remove-btn.e-icons,
-#customTarget .e-upload .e-upload-files .e-file-delete-btn.e-icons {
-  top: 50%;
+#customdropArea .e-upload .e-upload-files .e-file-remove-btn.e-icons,
+#customdropArea .e-upload .e-upload-files .e-file-delete-btn.e-icons {
+    bottom: 49px;
+    position: relative;
+    left: 90%;
+    width: 30px;
+    height: 17px;
+    opacity: 6;
+    display: block;
+    color: white;
+    background-color: green;
 }
 
 

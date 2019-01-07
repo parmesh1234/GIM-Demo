@@ -47,7 +47,11 @@ export class Customdroparea extends SampleBase {
     </span>);
     }
     onUploadSuccess(args) {
-
+        let reader = new FileReader();
+        reader.readAsDataURL(args.file.rawFile);
+        reader.onload = e => {
+            console.log(e.target.result);
+        }
         let li = this.getLiElement(args);
         li.querySelector('.upload-status').innerHTML = args.file.status;
         li.querySelector('.upload-status').classList.add('upload-success');
@@ -63,7 +67,7 @@ export class Customdroparea extends SampleBase {
         li.querySelector('.upload-status').innerHTML = args.file.status + '(' + progressValue + ' )';
     }
     onSelect(args) {
-        console.log(args);
+
         let allowedTypes = ['pdf','txt', 'xlsx', 'docx'];
         let modifiedFiles = [];
         for (let file of args.filesData) {
